@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: emailprocess-service
+spec:
+  selector:
+    app: emailprocess
+  ports:
+  - protocol: "TCP"
+    port: 5000
+    targetPort: 5000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emailprocess
+spec:
+  selector:
+    matchLabels:
+      app: emailprocess
+  replicas: 0
+  template:
+    metadata:
+      labels:
+        app: emailprocess
+    spec:
+      containers:
+      - name: emailprocess
+        image: emailprocess:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+
