@@ -20,7 +20,7 @@ spec:
   selector:
     matchLabels:
       app: emailprocess
-  replicas: 0
+  replicas: 1
   template:
     metadata:
       labels:
